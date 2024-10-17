@@ -68,7 +68,9 @@ async function handleProxyRequest(req, res, endpoint) {
          * It seems the URLs we get here or the one the client constructs from these URLs are tied to the requesting account.
          * The low quality `formats` URLs seem fine.
          */
-        delete responseData.streamingData.adaptiveFormats;
+        if (responseData.streamingData) {
+            delete responseData.streamingData.adaptiveFormats;
+        }
 
         if (nextResponse) {
             stats.countResponse('next', getYoutubeResponseStatus(nextResponse), null);
