@@ -40,7 +40,7 @@ if (process.env.ENABLE_STATS === '1') {
     app.get('/getStats', statsController.getStats);
 }
 
-app.listen({ port: process.env.PORT }, (err, address) => {
+app.listen({ port: process.env.PORT, host: '0.0.0.0' }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);
