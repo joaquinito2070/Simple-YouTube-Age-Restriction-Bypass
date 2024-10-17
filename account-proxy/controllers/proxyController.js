@@ -62,14 +62,9 @@ async function handleProxyRequest(req, res, endpoint) {
 
         responseData.proxy = { clientParams, youtubeGcrFlagSet, youtubeStatus };
 
-        /**
-         * Workaround: when we provide `adaptiveFormats` the client cannot playback the video.
-         *
-         * It seems the URLs we get here or the one the client constructs from these URLs are tied to the requesting account.
-         * The low quality `formats` URLs seem fine.
-         */
-        if (responseData.streamingData) {
-            delete responseData.streamingData.adaptiveFormats;
+        // Siempre obtener adaptiveFormats
+        if (responseData.streamingData && responseData.streamingData.adaptiveFormats) {
+            responseData.streamingData.adaptiveFormats = responseData.streamingData.adaptiveFormats;
         }
 
         if (nextResponse) {
